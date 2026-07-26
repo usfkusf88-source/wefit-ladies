@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #0a0a0b;
+  --brand-pink: #e14fa0;
+  --font-cairo: "Cairo", system-ui, "Segoe UI", Tahoma, sans-serif;
+}
+
+@layer base {
+  * {
+    @apply border-gray-line;
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "kern";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  /* RTL-aware focus ring */
+  :focus-visible {
+    outline: 2px solid var(--brand-pink);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Glass surface used on dark hero sections */
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+  .glass-light {
+    @apply bg-white/70 backdrop-blur-xl border border-white/60;
+  }
+
+  /* Primary brand button */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-pink-brand px-8 py-4
+           text-base font-bold text-white transition-all duration-300
+           hover:shadow-pink-glow hover:brightness-110 active:scale-[0.98]
+           disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/25
+           px-6 py-3 text-sm font-semibold text-white/90 transition-all duration-300
+           hover:bg-white/10;
+  }
+  .btn-dark {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-3
+           text-sm font-semibold text-white transition-all hover:bg-ink-soft active:scale-[0.98];
+  }
+
+  /* Field styles */
+  .field-label {
+    @apply mb-2 block text-sm font-semibold text-ink;
+  }
+  .field-input {
+    @apply w-full rounded-2xl border border-gray-line bg-white px-4 py-3.5 text-[15px] text-ink
+           placeholder:text-zinc-400 transition-all
+           focus:border-pink-brand focus:ring-2 focus:ring-pink-brand/20 focus:outline-none;
+  }
+  .chip {
+    @apply cursor-pointer select-none rounded-full border px-4 py-2 text-sm font-medium transition-all;
+  }
+  .chip-idle {
+    @apply border-gray-line bg-white text-ink hover:border-pink-300;
+  }
+  .chip-active {
+    @apply border-pink-brand bg-pink-brand text-white shadow-pink-glow;
+  }
+
+  /* Admin surfaces */
+  .card {
+    @apply rounded-2xl border border-gray-line bg-white shadow-card;
+  }
+  .stat-card {
+    @apply relative overflow-hidden rounded-2xl border border-gray-line bg-white p-5 shadow-card;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  /* Print: show only the lead sheet, hide chrome. */
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+    aside,
+    .sticky {
+      display: none !important;
+    }
+    body {
+      background: #fff !important;
+    }
+    .card {
+      box-shadow: none !important;
+      border-color: #ddd !important;
+      break-inside: avoid;
+    }
+  }
+  /* Animated speed-lines motif from the logo */
+  .brand-lines::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      transparent,
+      transparent 10px,
+      rgba(225, 79, 160, 0.08) 10px,
+      rgba(225, 79, 160, 0.08) 11px
+    );
+    pointer-events: none;
+  }
+  /* thin custom scrollbar */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 9999px;
+  }
+}
