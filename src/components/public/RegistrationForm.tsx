@@ -105,7 +105,7 @@ export function RegistrationForm({ utm, contactEmail }: { utm: UTM; contactEmail
     >
       {/* Name */}
       <Field label="الاسم الكامل" required error={errors.full_name?.message}>
-        <input {...register("full_name")} className="field-input" placeholder="مثال: سارة العتيبي" />
+        <input {...register("full_name")} className="field-input" placeholder="مثال: سارة عبدالله" />
       </Field>
 
       {/* Phone */}
@@ -121,7 +121,7 @@ export function RegistrationForm({ utm, contactEmail }: { utm: UTM; contactEmail
 
       <div className="grid grid-cols-1 gap-x-5 sm:grid-cols-2">
         {/* Email */}
-        <Field label="البريد الإلكتروني" hint="اختياري" error={errors.email?.message}>
+        <Field label="البريد الإلكتروني" required error={errors.email?.message}>
           <input {...register("email")} dir="ltr" className="field-input text-right" placeholder="name@email.com" />
         </Field>
         {/* Age */}
