@@ -21,11 +21,10 @@ export const registrationSchema = z.object({
     .trim()
     .refine(isValidSaudiPhone, "رقم جوال سعودي غير صحيح (مثال: 05XXXXXXXX)"),
   email: z
-    .string()
+    .string({ required_error: "البريد الإلكتروني مطلوب" })
     .trim()
-    .email("بريد إلكتروني غير صحيح")
-    .optional()
-    .or(z.literal("")),
+    .min(1, "البريد الإلكتروني مطلوب")
+    .email("بريد إلكتروني غير صحيح"),
   age: z
     .union([z.coerce.number().int().min(12, "العمر غير صحيح").max(99, "العمر غير صحيح"), z.literal("")])
     .optional(),
