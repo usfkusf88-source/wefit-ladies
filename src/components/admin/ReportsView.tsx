@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { FileSpreadsheet, FileDown, Printer, TrendingUp } from "lucide-react";
 import type { Lead, Campaign, Profile } from "@/lib/database.types";
-import { CONVERTED_STATUSES } from "@/lib/constants";
+import { CONVERTED_STATUSES, LEAD_SOURCES, MEMBERSHIPS, labelOf } from "@/lib/constants";
 import { pct } from "@/lib/utils";
 import { exportRowsCsv, exportRowsXlsx, exportLeadsXlsx } from "@/lib/export";
 
@@ -37,6 +37,19 @@ export function ReportsView({
   }, [leads, from, to]);
 
   const converted = inRange.filter(isConverted).length;
+
+  // Detailed per-lead rows for the range.
+  const detailRows = useMemo(
+    () =>
+      inRange.map((l) => ({
+        "الاسم": l.full_name,
+        "العمر": l.age ?? "",
+        "البريد الإلكتروني": l.email ?? "",
+        "من وين شافت الإعلان": labelOf(LEAD_SOURCES, l.source),
+        "المدة / العضوية": labelOf(MEMBERSHIPS, l.membership),
+      })),
+    [inRange]
+  );
 
   const campaignName = (id: string | null) => campaigns.find((c) => c.id === id)?.name ?? "بدون حملة";
   const profileName = (id: string | null) => {
@@ -115,6 +128,13 @@ export function ReportsView({
         <Summary label="نسبة التحويل" value={`${pct(converted, inRange.length)}%`} accent />
         <Summary label="عدد الحملات النشطة" value={campaigns.filter((c) => c.active).length} />
       </div>
+
+      {/* Detailed leads */}
+      <ReportTable
+        title="تفاصيل العملاء (الاسم، العمر، البريد، المصدر، المدة)"
+        rows={detailRows}
+        onXlsx={canExport ? () => exportRowsXlsx(detailRows, `wefit-details-${stamp}`, "Details") : undefined}
+      />
 
       {/* Campaign performance */}
       <ReportTable
