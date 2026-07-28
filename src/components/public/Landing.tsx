@@ -1,6 +1,7 @@
 import { Hero } from "./Hero";
 import { Features } from "./Features";
 import { RegistrationForm } from "./RegistrationForm";
+import { ReferralBanner } from "./ReferralBanner";
 import { PublicFooter } from "./PublicFooter";
 import { getSettings } from "@/lib/settings";
 
@@ -28,6 +29,7 @@ export async function Landing({ utm }: { utm: UTM }) {
               دقيقة واحدة تكفي — املئي بياناتك وكوني من أوائل المشتركات.
             </p>
           </div>
+          <ReferralBanner />
           <RegistrationForm utm={utm} contactEmail={settings.contact_email} />
         </div>
       </section>
