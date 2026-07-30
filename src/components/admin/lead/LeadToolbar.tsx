@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { Phone, Mail, Copy, FileDown, Trash2, UserCog, Check, Loader2 } from "lucide-react";
+import { Phone, Mail, Copy, FileDown, Trash2, UserCog, Check, Loader2, MessageCircle } from "lucide-react";
 import type { Lead, Profile } from "@/lib/database.types";
 import { assignLead, deleteLead } from "@/app/admin/(app)/leads/actions";
 import { can } from "@/lib/permissions";
@@ -46,6 +46,15 @@ export function LeadToolbar({
   return (
     <div className="card p-5">
       <h3 className="mb-4 text-sm font-bold text-ink">إجراءات</h3>
+
+      <a
+        href={`https://wa.me/${lead.phone}?text=${encodeURIComponent("مرحباً " + lead.full_name + " 🌸 معك فريق WEFIT Ladies")}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mb-2 flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] py-2.5 text-sm font-semibold text-white transition-all hover:brightness-105 active:scale-[0.98]"
+      >
+        <MessageCircle className="h-4 w-4" /> محادثة واتساب
+      </a>
 
       <div className="grid grid-cols-2 gap-2">
         <a href={`tel:${localPhone}`} className="btn-dark py-2.5">
