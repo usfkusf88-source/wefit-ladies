@@ -31,3 +31,14 @@ export async function getSettings(): Promise<Settings> {
     return DEFAULT_SETTINGS;
   }
 }
+
+/** Total number of registered leads (for the public social-proof counter). */
+export async function getLeadCount(): Promise<number> {
+  try {
+    const supabase = createAdminClient();
+    const { count } = await supabase.from("leads").select("*", { count: "exact", head: true });
+    return count ?? 0;
+  } catch {
+    return 0;
+  }
+}
