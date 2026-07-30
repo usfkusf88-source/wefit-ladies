@@ -59,3 +59,25 @@ export async function getPollResults(): Promise<PollResults> {
     return { ...EMPTY };
   }
 }
+
+// Today's vote count (for the admin page).
+export async function getPollToday(): Promise<number> {
+  try {
+    const admin = createAdminClient();
+    const start = new Date();
+    start.setHours(0, 0, 0, 0);
+    const { count } = await (admin as unknown as {
+      from: (t: string) => {
+        select: (c: string, o: { count: "exact"; head: true }) => {
+          gte: (col: string, v: string) => Promise<{ count: number | null }>;
+        };
+      };
+    })
+      .from("poll_votes")
+      .select("*", { count: "exact", head: true })
+      .gte("created_at", start.toISOString());
+    return count ?? 0;
+  } catch {
+    return 0;
+  }
+}
