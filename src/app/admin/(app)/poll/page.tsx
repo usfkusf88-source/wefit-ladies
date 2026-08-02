@@ -9,9 +9,9 @@ export const dynamic = "force-dynamic";
 export const metadata = { title: "التصويتات" };
 
 const OPTIONS = [
-  { key: "option1" as const, title: "من ٥ الفجر إلى ٧ المغرب", sub: "الصباح الباكر" },
-  { key: "option2" as const, title: "من ٦ الصباح إلى ٨ مساءً", sub: "طوال النهار" },
-  { key: "option3" as const, title: "من ٨ صباحاً إلى ١٠ الليل", sub: "حتى وقت متأخر" },
+  { key: "option1" as const, title: "من ٨ إلى ١١ صباحاً", sub: "الفترة الصباحية" },
+  { key: "option2" as const, title: "من ٤ إلى ٧ مساءً", sub: "بعد الظهر" },
+  { key: "option3" as const, title: "من ٥ إلى ١٠ مساءً", sub: "المساء" },
 ];
 
 export default async function PollPage() {
@@ -29,7 +29,7 @@ export default async function PollPage() {
     <>
       <PageHeader
         title="نتائج التصويت"
-        subtitle="أوقات السباحة المفضلة — تصويت الزائرات على صفحة التسجيل"
+        subtitle="الأوقات المفضلة للحصص الجماعية — تصويت الزائرات على صفحة التسجيل"
       />
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
@@ -37,7 +37,11 @@ export default async function PollPage() {
         <StatCard label="أصوات اليوم" value={today} icon={CalendarDays} />
         <StatCard
           label="الخيار الأعلى"
-          value={results.total ? `${Math.max(...rows.map((r) => r.pct))}%` : "—"}
+          value={
+            results.total
+              ? `${Math.max(...rows.map((r) => r.pct))}%`
+              : "—"
+          }
           icon={Trophy}
         />
       </div>
@@ -45,7 +49,7 @@ export default async function PollPage() {
       <div className="mt-6 card p-6">
         <div className="mb-5 flex items-center gap-2">
           <Waves className="h-4 w-4 text-pink-brand" />
-          <h3 className="text-sm font-bold text-ink">وش أفضل الأوقات المفضلة للسباحة؟</h3>
+          <h3 className="text-sm font-bold text-ink">وش أفضل وقت للحصص الجماعية؟</h3>
         </div>
 
         <div className="space-y-4">
@@ -65,7 +69,10 @@ export default async function PollPage() {
                 </div>
                 <div className="h-3 w-full overflow-hidden rounded-full bg-gray-soft">
                   <div
-                    className={cn("h-full rounded-full transition-all", isTop ? "bg-pink-brand" : "bg-pink-300")}
+                    className={cn(
+                      "h-full rounded-full transition-all",
+                      isTop ? "bg-pink-brand" : "bg-pink-300"
+                    )}
                     style={{ width: `${r.pct}%` }}
                   />
                 </div>
