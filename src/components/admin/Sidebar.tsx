@@ -28,7 +28,7 @@ const NAV: NavItem[] = [
   { href: "/admin/leads", label: "العملاء المحتملون", icon: Users, perm: "dashboard.view" },
   { href: "/admin/campaigns", label: "حملات QR", icon: QrCode, perm: "campaigns.manage" },
   { href: "/admin/reports", label: "التقارير", icon: BarChart3, perm: "reports.view" },
-  { href: "/admin/poll", label: "تصويتات السباحة", icon: Waves, perm: "dashboard.view" },
+  { href: "/admin/poll", label: "تصويت الحصص", icon: Waves, perm: "dashboard.view" },
   { href: "/admin/activity", label: "سجل النشاط", icon: ScrollText, perm: "activity.view" },
   { href: "/admin/users", label: "المستخدمون", icon: UserCog, perm: "users.manage" },
   { href: "/admin/settings", label: "الإعدادات", icon: Settings, perm: "settings.manage" },
