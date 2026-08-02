@@ -2,18 +2,18 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Waves, Check, Loader2, Timer } from "lucide-react";
+import { Dumbbell, Check, Loader2, Timer } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { submitVote, type PollResults } from "@/app/actions/poll";
 
 // ⏳ Poll closes at this time (Riyadh). Change this to extend/shorten.
-const POLL_END = new Date("2026-08-02T23:59:59+03:00").getTime();
-const STORAGE_KEY = "wf_poll_pool_hours_v1";
+const POLL_END = new Date("2026-08-05T23:59:59+03:00").getTime();
+const STORAGE_KEY = "wf_poll_group_classes_v1";
 
 const OPTIONS = [
-  { key: "option1", title: "من ٥ الفجر إلى ٧ المغرب", sub: "الصباح الباكر" },
-  { key: "option2", title: "من ٦ الصباح إلى ٨ مساءً", sub: "طوال النهار" },
-  { key: "option3", title: "من ٨ صباحاً إلى ١٠ الليل", sub: "حتى وقت متأخر" },
+  { key: "option1", title: "من ٨ إلى ١١ صباحاً", sub: "الفترة الصباحية" },
+  { key: "option2", title: "من ٤ إلى ٧ مساءً", sub: "بعد الظهر" },
+  { key: "option3", title: "من ٥ إلى ١٠ مساءً", sub: "المساء" },
 ] as const;
 
 function remaining() {
@@ -97,10 +97,10 @@ export function PollModal() {
 
             <div className="relative p-6 sm:p-7">
               <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-pink-brand text-white shadow-pink-glow">
-                <Waves className="h-7 w-7" />
+                <Dumbbell className="h-7 w-7" />
               </div>
-              <h3 className="text-center text-xl font-extrabold">صوّتي معنا 🏊‍♀️</h3>
-              <p className="mt-1 text-center text-sm text-white/60">ودنا نأخذ رأيك.. وش أفضل الأوقات المفضلة للسباحة؟</p>
+              <h3 className="text-center text-xl font-extrabold">صوّتي معنا 💪</h3>
+              <p className="mt-1 text-center text-sm text-white/60">ودنا نأخذ رأيك.. وش أفضل وقت للحصص الجماعية؟</p>
 
               {/* Countdown */}
               {left && (
